@@ -11,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+ConnectDB();
+
 app.use(
   cors({
     origin: "*",
@@ -43,6 +45,6 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(process.env.PORT, () => {
-  ConnectDB();
+ 
   console.log(`Server is running on port ${PORT}`);
 });
