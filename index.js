@@ -26,9 +26,15 @@ app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRouter);
 
 app.use((err, req, res, next) => {
-  const errorMessage = err.message || "Something Went Wrong!";
-  res.status(500).json({ message: errorMessage });
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
 });
+
 
 app.get("/", (req, res) => {
   res.send("server is Working");
