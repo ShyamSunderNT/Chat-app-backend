@@ -28,9 +28,13 @@ export const registerUser = async (req, res, next) => {
             token: jwt,
         });
     } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ message: 'Failed to register user. Please try again.' });
-    }
+ console.error(error);
+ res.status(500).json({
+  realError: error.message,
+  stack: error.stack
+ });
+}
+
 };
 
 export const loginUser = async (req, res) => {
